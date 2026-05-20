@@ -18,13 +18,16 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
-// create a card for an episode
 function createEpisodeCard(episode) {
   const card = document.createElement("section");
   card.classList.add("episode-card");
 
+  const season = String(episode.season).padStart(2, "0");
+  const number = String(episode.number).padStart(2, "0");
+  const episodeCode = `S${season}E${number}`;
+
   const title = document.createElement("h2");
-  title.textContent = episode.name;
+  title.textContent = `${episode.name} - ${episodeCode}`;
   card.appendChild(title);
 
   return card;
