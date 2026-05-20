@@ -30,6 +30,16 @@ function createEpisodeCard(episode) {
   title.textContent = `${episode.name} - ${episodeCode}`;
   card.appendChild(title);
 
+  const img = document.createElement("img");
+  img.src = episode.image?.medium || "";
+  img.alt = `${episode.name} cover`;
+  card.appendChild(img);
+
+  const summary = document.createElement("div");
+  summary.classList.add("episode-summary");
+  summary.innerHTML = episode.summary;
+  card.appendChild(summary);
+
   return card;
 }
 
