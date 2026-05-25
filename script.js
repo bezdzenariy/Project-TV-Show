@@ -1,7 +1,23 @@
-// initialize application when DOM is loaded
-function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+// feetch epizodes from API
+async function fetchEpisodes() {
+  const rootElem = document.getElementById('root');
+
+  try {
+    // show loading message
+    rootElem.innerHTML = '<p>Loading episodes...</p>';
+
+    // Fetch data from API
+    const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
+    if (!response.ok) throw new Error("Failed to fetch episodes");
+    
+    const episodes = await response.json();
+    makePageForEpisodes(episodes);
+  } catch (error) {
+    
+    // Show error message to user
+    rootElem.innerHTML = `<p style="color: red;">Error loading episodes: ${error.message}</p>`;
+    console.error(error);
+  }
 }
 
 // populate the page with episode cards
@@ -18,6 +34,7 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
+// сreate individual episode card
 function createEpisodeCard(episode) {
   const card = document.createElement("section");
   card.classList.add("episode-card");
