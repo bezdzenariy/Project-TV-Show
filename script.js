@@ -8,7 +8,7 @@ const cachedEpisodes = {};
 async function loadAllShows() {
   try {
     const showsContainer = document.getElementById("shows-container");
-    showsContainer.innerHTML = "<p>Loading shows...</p>";
+    showsContainer.innerHTML = "<p style='padding: 20px; text-align: center;'>Loading shows...</p>";
 
     const response = await fetch("https://api.tvmaze.com/shows");
     if (!response.ok) throw new Error("Failed to fetch shows");
@@ -19,13 +19,8 @@ async function loadAllShows() {
     renderShowCards(allShows);
     setupShowSearch();
   } catch (error) {
-    document.getElementById("shows-container").innerHTML =
-      `<p style="color: red;">Error loading shows: ${error.message}</p>`;
-    console.error(error);
-  }
-}
-
-function renderShowCards(shows) {
+    document.getElementById("shows-container").innerHTML = 
+      `<p style="color: red; padding: 20px;">⚠️ Error loading shows: ${error.message}</p>`;
   const container = document.getElementById("shows-container");
   container.innerHTML = "";
 
